@@ -3,6 +3,7 @@
     $.fn.modalup = function (options) {
         // ModalUp's default settings:        
         var defaults = {
+            id: "modalup",
             tittle: "Hello ModalUP",
             closeHeader: true,
             closeButton: true,
@@ -61,6 +62,7 @@
         var modal = $("<div />")
                 .attr(settings.modalSettings)
                 .css(settings.modalCSS);
+      
         var dialog = $("<div />")
                 .attr(settings.dialogSettings)
                 .css(settings.dialogCSS)
@@ -89,7 +91,7 @@
 //      Elementos de la cabecera(Header Elements)
         if (settings.closeHeader) {
             var closeHeaderButton = $("button")
-                    .attr(settings.closeheaderSettings)                    
+                    .attr(settings.closeheaderSettings)
                     .appendTo(modalHeader);
         }
         var titleHeader = $("h1")
@@ -99,20 +101,23 @@
 //      Elementos del pie de pagina(footer elements)
         if (settings.closeButton) {
             var closeFooterButton = $("button")
-                    .attr({text: settings.closeButtonName})                    
+                    .attr({text: settings.closeButtonName})
                     .appendTo(modalFooter);
         }
         if (settings.functionButton) {
             var functionFooterButton = $("button")
-                    .attr({text: settings.functionButtonName})                    
+                    .attr({text: settings.functionButtonName})
                     .appendTo(modalFooter);
         }
 //        Elementos del cuerpo del modal (Body elements)
-        $(modalBody).append(settings.body);
-
-        return this.each(function () {
-            $(document).append(modal);
-            $('#modalup').modal('show');
+        $(modalBody).append(settings.body); 
+        
+//        Adding modal to body page
+        $(document).add(modal);
+        $('#'+settings.id).modal();
+        
+        this.each(function () {
+//            $('#'+settings.id).modal('show');
         });
 
     };
