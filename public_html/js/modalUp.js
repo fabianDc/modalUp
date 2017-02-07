@@ -10,7 +10,10 @@
             closeButtonName: "Close",
             functionButton: true,
             functionButtonName: "Do something",
-            body: "<h1>Hello world</h1>",
+            body: "<h2>Hello world</h2>",
+            callback: function () {
+
+            },
             modalSettings: {
                 class: "modal fade",
                 id: "modalup"
@@ -32,9 +35,7 @@
                 class: "modal-body"
             },
             functionButtonSettings: {
-                class: "btn btn-primary",
-                onclick: function () {
-                }
+                class: "btn btn-primary"                
             },
             closeButtonSettings: {
                 'data-dismiss': "modal",
@@ -98,7 +99,7 @@
                         .attr(settings.closeHeaderSettings)
                         .appendTo(modalHeader);
             }
-            var titleHeader = $("<h5 />")
+            var titleHeader = $("<h3 />")
                     .text(settings.tittle)
                     .appendTo(modalHeader);
 
@@ -115,6 +116,7 @@
                 var functionFooterButton = $("<button />")
                         .attr(settings.functionButtonSettings)
                         .text(settings.functionButtonName)
+                        .click(settings.callback)
                         .appendTo(modalFooter);
             }
 //        Elementos del cuerpo del modal (Body elements)
