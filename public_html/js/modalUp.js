@@ -17,13 +17,13 @@
             },
             dialogSettings: {
                 class: "modal-dialog",
-                rol: "document"
+                role: "document"
             },
             headerSettings: {
                 class: "modal-header"
             },
             containerSettings: {
-                class: "modal-header"
+                class: "modal-content"
             },
             footerSettings: {
                 class: "modal-footer"
@@ -32,13 +32,15 @@
                 class: "modal-body"
             },
             functionButtonSettings: {
-                class: "btn btn-primary"
+                class: "btn btn-primary",
+                onclick: function () {
+                }
             },
             closeButtonSettings: {
                 'data-dismiss': "modal",
                 class: "btn btn-secondary"
             },
-            closeheaderSettings: {
+            closeHeaderSettings: {
                 class: "close",
                 'data-dismiss': "modal",
                 'aria-label': "Close"
@@ -58,68 +60,71 @@
         };
         var settings = $.extend({}, defaults, options);
 
-        // Contenedores del modal(Modal Containers):
-        var modal = $("<div />")
-                .attr(settings.modalSettings)
-                .css(settings.modalCSS);
-      
-        var dialog = $("<div />")
-                .attr(settings.dialogSettings)
-                .css(settings.dialogCSS)
-                ;
-        var modalContainer = $("<div />")
-                .attr(settings.containerSettings)
-                .css(settings.containerCSS)
-                .appendTo(dialog);
+//        Adding modal to body page or open modal;      
+        if (!$('#' + settings.id).length) {
+            // Contenedores del modal(Modal Containers):
+            var modal = $("<div />")
+                    .attr(settings.modalSettings)
+                    .css(settings.modalCSS);
 
-        var modalHeader = $("<div />")
-                .attr(settings.headerSettings)
-                .css(settings.headerCSS)
-                .appendTo(modalContainer);
+            var dialog = $("<div />")
+                    .attr(settings.dialogSettings)
+                    .css(settings.dialogCSS)
+                    .appendTo(modal);
+            var modalContainer = $("<div />")
+                    .attr(settings.containerSettings)
+                    .css(settings.containerCSS)
+                    .appendTo(dialog);
 
-        var modalBody = $("<div />")
-                .attr(settings.bodySettings)
-                .css(settings.bodyCSS)
-                .appendTo(modalContainer);
-        var modalFooter = $("<div />")
-                .attr(settings.footerSettings)
-                .css(settings.footerCSS)
-                .appendTo(modalContainer);
+            var modalHeader = $("<div />")
+                    .attr(settings.headerSettings)
+                    .css(settings.headerCSS)
+                    .appendTo(modalContainer);
+
+            var modalBody = $("<div />")
+                    .attr(settings.bodySettings)
+                    .css(settings.bodyCSS)
+                    .appendTo(modalContainer);
+            var modalFooter = $("<div />")
+                    .attr(settings.footerSettings)
+                    .css(settings.footerCSS)
+                    .appendTo(modalContainer);
 
 //      Elementos del modal(Modal elements)
 //      
 //      Elementos de la cabecera(Header Elements)
-        if (settings.closeHeader) {
-            var closeHeaderButton = $("button")
-                    .attr(settings.closeheaderSettings)
+            if (settings.closeHeader) {
+                var closeHeaderButton = $("<button />")
+                        .attr(settings.closeHeaderSettings)
+                        .appendTo(modalHeader);
+            }
+            var titleHeader = $("<h5 />")
+                    .text(settings.tittle)
                     .appendTo(modalHeader);
-        }
-        var titleHeader = $("h1")
-                .attr({text: settings.tittle})
-                .appendTo(modalHeader);
+
 
 //      Elementos del pie de pagina(footer elements)
-        if (settings.closeButton) {
-            var closeFooterButton = $("button")
-                    .attr({text: settings.closeButtonName})
-                    .appendTo(modalFooter);
-        }
-        if (settings.functionButton) {
-            var functionFooterButton = $("button")
-                    .attr({text: settings.functionButtonName})
-                    .appendTo(modalFooter);
-        }
-//        Elementos del cuerpo del modal (Body elements)
-        $(modalBody).append(settings.body); 
-        
-//        Adding modal to body page
-        $(document).add(modal);
-        $('#'+settings.id).modal();
-        
-        this.each(function () {
-//            $('#'+settings.id).modal('show');
-        });
+            if (settings.closeButton) {
+                var closeFooterButton = $("<button />")
+                        .attr(settings.closeButtonSettings)
+                        .text(settings.closeButtonName)
+                        .appendTo(modalFooter);
 
+            }
+            if (settings.functionButton) {
+                var functionFooterButton = $("<button />")
+                        .attr(settings.functionButtonSettings)
+                        .text(settings.functionButtonName)
+                        .appendTo(modalFooter);
+            }
+//        Elementos del cuerpo del modal (Body elements)
+            $(modalBody).append(settings.body);
+
+            $(this).parent('body').append(modal);
+            $(modal).modal('show');
+        } else {
+            $('#' + settings.id).modal('show');
+        }
     };
 
 }(jQuery));
