@@ -22,8 +22,8 @@ Attributes
 
   - tittle
   - body 
-  -callback
-  -
+  - callback
+  
  
 
 Examples
@@ -36,7 +36,7 @@ Examples
                 <button type="button" class="btn btn-info btn-lg" id="modaltest" onclick="$(this).modalup(conf)">Open Modal</button>  
             </div>
 2. script
-        <script>
-          var conf={body:'<p>How do I look?!</p>',tittle:'My new modalUp',closeButtonName:"Cerrar",functionButtonName:"Guardar"};
-        </script>   
-            
+        
+        var conf={body:'How do I look?!',tittle:'My new modalUp',closeButtonName:"Cerrar",functionButtonName:"Guardar"};
+        
+
